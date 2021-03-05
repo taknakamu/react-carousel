@@ -21,28 +21,15 @@ const CarouselWrapper = styled.div `
     width: 100%;
     max-width: 1000px;
     height: 100%;
-    transition: all 300ms ease-in-out;
-    animation-name: fadeIn;
-    animation-duration: 3s;
-  }
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
 
-  @keyframes fadeIn {
-    0% {
-        opacity:0;
-        width:200px;
+    > div {
+      min-width: 100%;
+      transition: 0.4s ease-out;
     }
-    100% {
-        opacity:1;
-        width:400px;
-    }
-  }
-
-  .show {
-    display: block;
-  }
-
-  .hide {
-    display: none;
   }
 
   @media (max-width: 768px) {
@@ -80,7 +67,6 @@ export function Carousel(props: Props) {
     } else if (index >= count) {
       index = 0;
     }
-    console.log(index);
     setIndex(index);
   }
   return (
@@ -89,7 +75,7 @@ export function Carousel(props: Props) {
       <div className="carousel-body">
       {React.Children.map(props.children, (child, i) => {
         return (
-          <div key={i} className={i === index ? 'show' : 'hide'}>
+          <div key={i} style={{transform: `translateX(calc(-100% * ${index}))`}}>
             {child}
           </div>
         );
