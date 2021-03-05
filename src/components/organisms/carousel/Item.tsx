@@ -1,16 +1,45 @@
 import { faCloud, faEdit, faEnvelope, faFileInvoice, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+import styled from 'styled-components';
 import { Appeal } from '../../atoms/Appeal';
 import { IconItem } from '../../atoms/IconItem';
 import { SpeechBalloon } from '../../atoms/SpeechBalloon';
 import { Title } from '../../atoms/Title';
 import { Features } from '../../molecules/Features';
 import { Testimonials, TestimonialsCenter, TestimonialsLeft, TestimonialsRight } from '../../molecules/Testimonials';
-import { Container, Footer } from '../../templates/Default';
+import Color from '../../templates/Color';
 
 type Props = {
   id: string
 }
+
+export const Container = styled.div`
+  background-color: #f6f6f6;
+  padding: 36px 48px 0;
+
+  @media (max-width: 1024px) {
+    padding: 36px 24px 0;
+  }
+  @media (max-width: 768px) {
+    padding: 20px 24px 0;
+  }
+  @media (max-width: 420px) {
+    padding: 20px 6px 0;
+  }
+`
+
+export const Footer = styled.div`
+  text-align: center;
+  height: 120px;
+  background-color: ${Color.PRIMARY};
+  padding: 30px;
+  box-sizing: border-box;
+
+  @media (max-width: 420px) {
+    height: 84px;
+    padding: 12px;
+  }
+`;
 
 export function CarouselItem(props: Props) {
   switch (props.id) {

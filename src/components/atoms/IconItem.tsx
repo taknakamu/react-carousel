@@ -31,7 +31,7 @@ const IconLinkButton = styled(IconButton.withComponent('a'))`
     width: 60px;
 
     label {
-      font-size: 15px;
+      font-size: 12px;
     }
   }
 `

@@ -18,6 +18,17 @@ const FeaturesWrapper = styled.div `
   @media (max-width: 768px) {
     padding: 24px 0;
   }
+  @media (max-width: 420px) {
+    display: block;
+
+    & > div {
+      margin-bottom: 24px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 `
 
 type Props = {

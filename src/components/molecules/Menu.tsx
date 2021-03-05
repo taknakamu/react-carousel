@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Color from '../templates/Color';
 
 type Props = {
-  defaultActiveItemIndex?: number
+  activeIndex?: number
   children: React.ReactElement[];
 }
 
@@ -32,23 +32,16 @@ const Ul = styled.ul`
       color: #333;
     }
   }
-
-  @media (max-width: 768px) {
-    .active a {
-      height: 67px;
-    }
-  }
 `
 
 export const Menu: React.FC<Props> = props => {
-  const [index, setIndex] = useState(props.defaultActiveItemIndex || 0);
   return (
     <Ul>
       {React.Children.map(props.children, (child, i) => {
         return (
-          <li onClick={() => setIndex(i)} className={i === index ? 'active' : 'inactive'}>
+          <div className={i === props.activeIndex ? 'active' : 'inactive'}>
             {child}
-          </li>
+          </div>
         );
       })}
     </Ul>

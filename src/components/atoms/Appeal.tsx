@@ -31,17 +31,10 @@ const AppealWrapper = styled.div `
     }  
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 768px) {
     div {
       em {
-        font-size: 28px;
-      }
-    }
-  }
-  @media (max-width: 320px) {
-    div {
-      em {
-        font-size: 1em;
+        font-size: 20px;
       }
     }
   }

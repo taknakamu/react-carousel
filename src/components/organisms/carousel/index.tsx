@@ -1,8 +1,22 @@
-import { faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faCalculator, faChevronCircleLeft, faChevronCircleRight, faEdit, faEnvelopeOpenText, faIdCard, faLaptopCode } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { IconItem } from '../../atoms/IconItem';
+import { Menu } from '../../molecules/Menu';
 import Color from '../../templates/Color';
+
+export const Header = styled.header`
+  height: 156px;
+  border-bottom: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 420px) {
+    height: 130px;
+  }
+`
 
 const CarouselWrapper = styled.div `
   display: flex;
@@ -15,6 +29,7 @@ const CarouselWrapper = styled.div `
     color: ${Color.PRIMARY};
     margin: 0 42px;
     cursor: pointer;
+    z-index: 1;
   }
 
   .carousel-body {
@@ -25,6 +40,7 @@ const CarouselWrapper = styled.div `
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
+    min-width: 320px;
 
     > div {
       min-width: 100%;
@@ -33,15 +49,14 @@ const CarouselWrapper = styled.div `
   }
 
   @media (max-width: 768px) {
+    .carousel-body {
+      margin: 0 30px;
+    }
+    
     .arrow {
       font-size: 34px;
       margin: 0 24px;
-    }
-  }
-  @media (max-width: 420px) {
-    .arrow {
       position: absolute;
-      margin: 0;
 
       &-left {
         left: 0;
@@ -70,18 +85,39 @@ export function Carousel(props: Props) {
     setIndex(index);
   }
   return (
-    <CarouselWrapper>
-      <FontAwesomeIcon onClick={() => doSlide(index-1, props.children.length)} icon={faChevronCircleLeft} size="3x" className="arrow arrow-left"/>
-      <div className="carousel-body">
-      {React.Children.map(props.children, (child, i) => {
-        return (
-          <div key={i} style={{transform: `translateX(calc(-100% * ${index}))`}}>
-            {child}
-          </div>
-        );
-      })}
-      </div>
-      <FontAwesomeIcon onClick={() => doSlide(index+1, props.children.length)} icon={faChevronCircleRight} size="3x" className="arrow arrow-right"/>
-    </CarouselWrapper>
+    <>
+      <Header>
+        <Menu activeIndex={index}>
+          <li onClick={() => setIndex(0)}>
+            <IconItem icon={faLaptopCode} href="#1">経理</IconItem>
+          </li>
+          <li onClick={() => setIndex(1)}>
+            <IconItem icon={faEdit} href="#2">請求書作成</IconItem>
+          </li>
+          <li onClick={() => setIndex(2)}>
+            <IconItem icon={faEnvelopeOpenText} href="#3">経費精算</IconItem>
+          </li>
+          <li onClick={() => setIndex(3)}>
+            <IconItem icon={faCalculator} href="#4">給与計算</IconItem>
+          </li>
+          <li onClick={() => setIndex(4)}>
+            <IconItem icon={faIdCard} href="#5">マイナンバー収集</IconItem>
+          </li>
+        </Menu>
+      </Header>
+      <CarouselWrapper>
+        <FontAwesomeIcon onClick={() => doSlide(index-1, props.children.length)} icon={faChevronCircleLeft} size="3x" className="arrow arrow-left"/>
+        <div className="carousel-body">
+        {React.Children.map(props.children, (child, i) => {
+          return (
+            <div key={i} style={{transform: `translateX(calc(-100% * ${index}))`}}>
+              {child}
+            </div>
+          );
+        })}
+        </div>
+        <FontAwesomeIcon onClick={() => doSlide(index+1, props.children.length)} icon={faChevronCircleRight} size="3x" className="arrow arrow-right"/>
+      </CarouselWrapper>
+    </>
   );
 }
